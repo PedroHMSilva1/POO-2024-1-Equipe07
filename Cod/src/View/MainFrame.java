@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
@@ -19,7 +18,7 @@ public class MainFrame extends JFrame {
         profilePanel.setBackground(Color.LIGHT_GRAY);
 
         // Círculo de perfil (imagem do usuário)
-        ImageIcon profileImageIcon = new ImageIcon("C:\\Users\\GuilhermeHVS\\Downloads\\3135715.png");
+        ImageIcon profileImageIcon = new ImageIcon("src\\Assets\\Perfil.png");
         Image profileImage = profileImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         JLabel profileImageLabel = new JLabel(new ImageIcon(profileImage));
         profileImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -71,7 +70,7 @@ public class MainFrame extends JFrame {
         infoText.setText("**Título do Evento:**\n" +
                 "Evento de Lançamento do Novo Produto\n\n" +
                 "**Data e Hora:**\n" +
-                "Sábado, 15 de Maio de 2024\n" +
+                "Quarta-Feita, 15 de Maio de 2024\n" +
                 "Das 14:00 às 18:00\n\n" +
                 "**Localização:**\n" +
                 "Centro de Convenções XYZ\n" +
@@ -88,7 +87,7 @@ public class MainFrame extends JFrame {
         sidePanel.add(new JScrollPane(infoText));
 
         // Painel para a imagem do mapa
-        JPanel mapPanel = new ImagePanel("C:\\Users\\GuilhermeHVS\\Downloads\\mapa.jpg");
+        JPanel mapPanel = new ImagePanel("src\\Assets\\mapa.jpg");
         mapPanel.add(new JLabel("Localização"));
         sidePanel.add(mapPanel);
 
