@@ -1,11 +1,10 @@
 package Controller;
 
 import java.sql.*;
-
-import Model.Beans.*;
+import view.Cadastro;
 
 public class ConexaoMySQL {
-    private final static String url = "jdbc:mysql://localhost:3306/PI";
+    private final static String url = "jdbc:mysql://localhost:3306/Senac";
     private final static String username = "root";
     private final static String password = "";
 
@@ -17,37 +16,35 @@ public class ConexaoMySQL {
         try {
             ConexaoMySQL conexao = new ConexaoMySQL();
             Connection cn = conexao.openDB();
-    
+
             PreparedStatement ps = cn.prepareStatement(
-                "INSERT INTO Usuarios (nome, email, senha, telefone, data, endereco)" +
+                "INSERT INTO Usuarios (Nome, Email, Senha, Telefone, Data, Organizador)" +
                 " VALUES (?, ?, ?, ?, ?, ?)");
-    
-            Usuario usuario = new Usuario();
-            usuario.setNome("Exemplo");
-            usuario.setEmail("exemplo@email.com");
-            usuario.setSenha("senha123");
-            usuario.setTelefone("123456789");
 
-            usuario.setEndereco("Rua Exemplo, 123");
-    
-            ps.setString(1, usuario.getNome());
-            ps.setString(2, usuario.getEmail());
-            ps.setString(3, usuario.getSenha());
-            ps.setString(4, usuario.getTelefone());
+            Cadastro usuario = new Cadastro();
+            usuario.setNomeFieldText("Exemplo");
+            usuario.setEmailFieldText("exemplo@email.com");
+            usuario.setSenhaFieldText("senha123");
+            usuario.setTelefoneFieldText("+55(11)95555-6666");
+            usuario.setDataNascimentoFieldText("01/01/2000");
+            usuario.setOrganizadorSelected(true);
 
-            ps.setDate(5, new java.sql.Date(System.currentTimeMillis())); // example for current date
-            ps.setString(6, usuario.getEndereco());
-    
+            ps.setString(1, usuario.getNomeFieldText());
+            ps.setString(2, usuario.getEmailFieldText());
+            ps.setString(3, usuario.getSenhaFieldText());
+            ps.setString(4, usuario.getTelefoneFieldText());
+            ps.setString(5, usuario.getDataNascimentoFieldText());
+            ps.setBoolean(6, usuario.isOrganizadorSelected());
+
             ps.executeUpdate();
             System.out.println("Usuário cadastrado com sucesso.");
-    
+
             conexao.closeDB();
         } catch (SQLException e) {
             System.out.println("Falha ao realizar a operação.");
             e.printStackTrace();
         }
     }
-    
 
     public Connection openDB() {
         try {

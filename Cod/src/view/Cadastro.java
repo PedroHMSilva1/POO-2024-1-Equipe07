@@ -1,13 +1,16 @@
 package view;
+
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Cadastro extends JFrame {
     private JTextField nomeField, emailField, telefoneField;
     private JPasswordField senhaField;
     private JFormattedTextField dataNascimentoField;
+    private JCheckBox checkfield;
 
     public Cadastro() {
         super("Cadastro");
@@ -34,7 +37,10 @@ public class Cadastro extends JFrame {
         dataNascimentoField = new JFormattedTextField(formatter);
         panel.add(dataNascimentoField);
 
-
+        panel.add(new JLabel("Organizador de Evento:"));
+        checkfield = new JCheckBox();
+        panel.add(checkfield);
+        
         JButton cadastrarButton = new JButton("Cadastrar");
         cadastrarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -62,28 +68,55 @@ public class Cadastro extends JFrame {
     }
 
     private void confirmarCadastro() {
-        int resposta = JOptionPane.showConfirmDialog(this, "Confirmar informações?", "Confirmação", JOptionPane.YES_NO_OPTION);
-        if (resposta == JOptionPane.YES_OPTION) {
-            cadastrar();
-        } else {
-        }
+        JOptionPane.showMessageDialog(this, "Cadastro confirmado!");
     }
 
-    private void cadastrar() {
-        String nome = nomeField.getText();
-        String email = emailField.getText();
-        String senha = new String(senhaField.getPassword());
-        String telefone = telefoneField.getText();
-        String dataNascimento = dataNascimentoField.getText();
+    public String getNomeFieldText() {
+        return nomeField.getText();
+    }
 
+    public void setNomeFieldText(String text) {
+        nomeField.setText(text);
+    }
 
+    public String getEmailFieldText() {
+        return emailField.getText();
+    }
 
-        System.out.println("Nome: " + nome);
-        System.out.println("Email: " + email);
-        System.out.println("Senha: " + senha);
-        System.out.println("Telefone: " + telefone);
-        System.out.println("Data de Nascimento: " + dataNascimento);
+    public void setEmailFieldText(String text) {
+        emailField.setText(text);
+    }
 
+    public String getTelefoneFieldText() {
+        return telefoneField.getText();
+    }
+
+    public void setTelefoneFieldText(String text) {
+        telefoneField.setText(text);
+    }
+
+    public String getSenhaFieldText() {
+        return new String(senhaField.getPassword());
+    }
+
+    public void setSenhaFieldText(String text) {
+        senhaField.setText(text);
+    }
+
+    public String getDataNascimentoFieldText() {
+        return dataNascimentoField.getText();
+    }
+
+    public void setDataNascimentoFieldText(String text) {
+        dataNascimentoField.setText(text);
+    }
+
+    public boolean isOrganizadorSelected() {
+        return checkfield.isSelected();
+    }
+
+    public void setOrganizadorSelected(boolean selected) {
+        checkfield.setSelected(selected);
     }
 
     public static void main(String[] args) {
