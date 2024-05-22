@@ -34,7 +34,7 @@ CREATE TABLE senac.compras (
     meia_entrada BOOLEAN NOT NULL,
     quantidade INT NOT NULL,
     valor_ingresso DOUBLE NOT NULL,
-    total_ingresso DOUBLE NOT NULL,
+    valor_pago DOUBLE NOT NULL,
     forma_pagamento VARCHAR(50) NOT NULL,
     nome_comprador VARCHAR(255) NOT NULL,
     data_hora_compra TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
