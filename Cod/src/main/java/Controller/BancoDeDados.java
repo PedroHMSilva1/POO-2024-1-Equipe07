@@ -20,9 +20,11 @@ public class BancoDeDados {
     static PreparedStatement ps = null;
 
     public static void main(String[] args) {
+        
+        ImageIcon eventIcon = new ImageIcon("src\\Assets\\EventMaster.jpg");
         try {
             String operacao[] = {"Cadastro de Usuário", "Login"};
-            Object escolha = JOptionPane.showInputDialog(null, "O que deseja realizar?", "EventMaster", JOptionPane.QUESTION_MESSAGE, null, operacao, operacao[0]);
+            Object escolha = JOptionPane.showInputDialog(null, "O que deseja realizar?", "EventMaster", JOptionPane.QUESTION_MESSAGE, eventIcon, operacao, operacao[0]);
             realizaOperacao(escolha);
         } catch (Exception e) {
             e.printStackTrace();
