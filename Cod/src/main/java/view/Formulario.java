@@ -2,7 +2,6 @@ package view;
 
 import Model.Beans.Usuario;
 import Controller.BancoDeDados;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +17,7 @@ public class Formulario extends JFrame {
 
     public Formulario() {
         setTitle("Cadastro de Usuário");
-        setSize(300, 400);
+        setSize(300, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -29,10 +28,11 @@ public class Formulario extends JFrame {
         JLabel labelSenha = new JLabel("Senha:");
         passwordFieldSenha = new JPasswordField(20);
         JLabel labelTelefone = new JLabel("Telefone:");
-        textFieldTelefone = new JTextField(20);
+        textFieldTelefone = new JTextField(18);
         JLabel labelOrganizador = new JLabel("Organizador:");
         checkBoxOrganizador = new JCheckBox();
         JButton buttonCadastrar = new JButton("Cadastrar");
+        JButton buttonVoltar = new JButton("Voltar");
 
         setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         add(labelNome);
@@ -46,12 +46,20 @@ public class Formulario extends JFrame {
         add(labelOrganizador);
         add(checkBoxOrganizador);
         add(buttonCadastrar);
+        add(buttonVoltar);
 
         buttonCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cadastrarUsuario();
             }
+        });
+
+        buttonVoltar.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    dispose();
+                    SwingUtilities.invokeLater(() -> BancoDeDados.main(null));
+                }
         });
     }
 
@@ -80,5 +88,4 @@ public class Formulario extends JFrame {
             }
         }
     }
-
 }

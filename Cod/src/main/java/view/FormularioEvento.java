@@ -25,28 +25,29 @@ public class FormularioEvento extends JFrame {
         this.mainFrame = mainFrame;
 
         setTitle("Cadastrar Evento");
-        setSize(400, 500);
+        setSize(360, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         JLabel labelTitulo = new JLabel("Título:");
-        textFieldTitulo = new JTextField(20);
+        textFieldTitulo = new JTextField(21);
         JLabel labelDataHora = new JLabel("Data e Hora (yyyy-MM-dd HH:mm):");
         try {
             MaskFormatter formatter = new MaskFormatter("####-##-## ##:##");
             formattedTextFieldDataHora = new JFormattedTextField(formatter);
-            formattedTextFieldDataHora.setColumns(20);
+            formattedTextFieldDataHora.setColumns(7);
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
         JLabel labelLocalizacao = new JLabel("Localização:");
-        textFieldLocalizacao = new JTextField(20);
+        textFieldLocalizacao = new JTextField(18);
+        System.out.println();
         JLabel labelDescricao = new JLabel("Descrição:");
-        textAreaDescricao = new JTextArea(5, 20);
+        textAreaDescricao = new JTextArea(6, 19);
         JLabel labelCapacidade = new JLabel("Capacidade:");
-        textFieldCapacidade = new JTextField(20);
+        textFieldCapacidade = new JTextField(18);
         JLabel labelValorIngressos = new JLabel("Valor dos Ingressos:");
-        textFieldValorIngressos = new JTextField(20);
+        textFieldValorIngressos = new JTextField(14);
         JButton buttonCadastrar = new JButton("Cadastrar");
 
         setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));

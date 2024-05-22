@@ -30,6 +30,7 @@ public class Login extends JFrame {
         JLabel labelSenha = new JLabel("Senha:");
         textFieldSenha = new JPasswordField(15);
         JButton buttonLogin = new JButton("Login");
+        JButton buttonVoltar = new JButton("Voltar");
 
         // Define o layout
         setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -40,6 +41,7 @@ public class Login extends JFrame {
         add(labelSenha);
         add(textFieldSenha);
         add(buttonLogin);
+        add(buttonVoltar);
 
         // Adiciona o ouvinte de eventos ao botão
         buttonLogin.addActionListener(new ActionListener() {
@@ -48,6 +50,13 @@ public class Login extends JFrame {
                 verificarLogin();
             }
         });
+
+        buttonVoltar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                SwingUtilities.invokeLater(() -> BancoDeDados.main(null));
+            }
+    });
     }
 
    private void verificarLogin() {
