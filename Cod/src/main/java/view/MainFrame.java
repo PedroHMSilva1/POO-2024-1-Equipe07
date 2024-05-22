@@ -27,7 +27,7 @@ public class MainFrame extends JFrame {
     public MainFrame(int userID) throws SQLException {
         this.usuarioLogado = BancoDeDados.recuperarUsuario(userID);
 
-        setTitle("Aplicativo de Eventos");
+        setTitle("Event Master");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
