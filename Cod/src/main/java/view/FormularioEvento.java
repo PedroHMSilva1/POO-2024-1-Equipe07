@@ -25,7 +25,7 @@ public class FormularioEvento extends JFrame {
         this.mainFrame = mainFrame;
 
         setTitle("Cadastrar Evento");
-        setSize(360, 400);
+        setSize(360, 360);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
 

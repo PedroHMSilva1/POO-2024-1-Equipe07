@@ -25,7 +25,7 @@ public class Login extends JFrame {
         setResizable(false);
 
         // Cria os componentes
-        JLabel labelEmail = new JLabel("Email:");
+        JLabel labelEmail = new JLabel("Email: ");
         textFieldEmail = new JTextField(15);
         JLabel labelSenha = new JLabel("Senha:");
         textFieldSenha = new JPasswordField(15);

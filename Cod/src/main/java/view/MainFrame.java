@@ -49,7 +49,7 @@ public class MainFrame extends JFrame {
         usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         profilePanel.add(usernameLabel, BorderLayout.SOUTH);
 
-        String[] menuItems = {"Profile", "Cadastrar Eventos", "Preferências", "Meus Ingressos", "Logout"};
+        String[] menuItems = {"Profile", "Cadastrar Eventos", "Preferências", "Meus Ingressos", "Relatório de Vendas", "Logout"};
         JList<String> menuList = new JList<>(menuItems);
         JScrollPane menuScrollPane = new JScrollPane(menuList);
         JPanel menuPanel = new JPanel(new BorderLayout());
@@ -72,6 +72,12 @@ public class MainFrame extends JFrame {
                             break;
                         case "Profile":
                             exibirPerfil(usuarioLogado);
+                            break;
+                        case "Meus Ingressos":
+                            exibirMeusIngressos(usuarioLogado);
+                            break;
+                        case "Relatório de Vendas":
+                            exibirRelatorioVendas();
                             break;
                     }
                 }
@@ -187,10 +193,25 @@ public class MainFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Apenas organizadores podem cadastrar eventos.", "Acesso Negado", JOptionPane.WARNING_MESSAGE);
         }
     }
-    
+
+    private void exibirRelatorioVendas() {
+        if (usuarioLogado.isOrganizador()) {
+            RelatorioVendas relatorioVendas = new RelatorioVendas(this, usuarioLogado);
+            relatorioVendas.setLocationRelativeTo(null);
+            relatorioVendas.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Apenas organizadores podem acessar o relatório de vendas.", "Acesso Negado", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
     private void exibirPerfil(Usuario usuario) {
-    Perfil janelaPerfil = new Perfil(usuarioLogado);
-    janelaPerfil.setVisible(true);
-}
+        Perfil janelaPerfil = new Perfil(usuarioLogado);
+        janelaPerfil.setVisible(true);
+    }
+
+    private void exibirMeusIngressos(Usuario usuario) {
+        MeusIngressos janelaIngressos = new MeusIngressos(this, usuarioLogado);
+        janelaIngressos.setVisible(true);
+    }
 
 }

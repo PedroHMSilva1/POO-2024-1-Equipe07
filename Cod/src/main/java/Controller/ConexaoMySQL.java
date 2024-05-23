@@ -5,7 +5,7 @@ import java.sql.*;
 public class ConexaoMySQL {
     private final static String url = "jdbc:mysql://localhost:3306/Senac";
     private final static String username = "root";
-    private final static String password = "";
+    private final static String password = "Password";
 
     private Connection con;
     private PreparedStatement ps;

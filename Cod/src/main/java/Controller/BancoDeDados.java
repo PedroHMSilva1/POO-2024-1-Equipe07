@@ -1,6 +1,10 @@
 package Controller;
 
+import Model.Beans.VendaEvento;
+import Controller.ConexaoMySQL;
+import Model.Beans.Compra;
 import Model.Beans.Evento;
+import Model.Beans.Organizador;
 import Model.Beans.Usuario;
 import view.Formulario;
 import view.Login;
@@ -12,6 +16,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.ImageIcon;
 
 public class BancoDeDados {
 
@@ -20,7 +27,7 @@ public class BancoDeDados {
     static PreparedStatement ps = null;
 
     public static void main(String[] args) {
-        
+
         ImageIcon eventIcon = new ImageIcon("src\\Assets\\EventMaster.jpg");
         try {
             String operacao[] = {"Cadastro de Usuário", "Login"};
@@ -164,7 +171,7 @@ public class BancoDeDados {
                 boolean organizador = rs.getBoolean("Organizador");
 
                 // Criar o objeto Usuario
-                usuario = new Usuario(nome, senha, email, telefone, organizador);
+                usuario = new Organizador(nome, senha, email, telefone, organizador);
             }
         } finally {
             if (rs != null) {
@@ -242,6 +249,57 @@ public class BancoDeDados {
         }
 
         return eventos;
+    }
+
+    public static Map<Integer, VendaEvento> recuperarVendasPorEvento() throws SQLException {
+        Map<Integer, VendaEvento> vendasPorEvento = new HashMap<>();
+
+        Connection cn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            cn = conexao.openDB();
+            ps = cn.prepareStatement("SELECT e.id AS evento_id, e.titulo AS nome_evento, c.quantidade, c.valor_pago FROM compras c INNER JOIN eventos e ON c.evento_id = e.id");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int eventoId = rs.getInt("evento_id");
+                String nomeEvento = rs.getString("nome_evento");
+                int quantidade = rs.getInt("quantidade");
+                double valorPago = rs.getDouble("valor_pago");
+
+                if (vendasPorEvento.containsKey(eventoId)) {
+                    VendaEvento vendaEvento = vendasPorEvento.get(eventoId);
+                    vendaEvento.adicionarVenda(quantidade, valorPago);
+                } else {
+                    VendaEvento vendaEvento = new VendaEvento(nomeEvento, quantidade, valorPago);
+                    vendasPorEvento.put(eventoId, vendaEvento);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+
+        return vendasPorEvento;
+    }
+
+    public static Evento recuperarEventoPorId(int id) throws SQLException {
+        ArrayList<Evento> eventos = recuperarEventos();
+        for (Evento evento : eventos) {
+            if (evento.getId() == id) {
+                return evento;
+            }
+        }
+        return null; // Retorna null se o evento com o ID especificado não for encontrado
     }
 
 }

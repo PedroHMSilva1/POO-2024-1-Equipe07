@@ -16,16 +16,15 @@ public class CompraDAO {
         try {
             cn = conexao.openDB();
             ps = cn.prepareStatement(
-                    "INSERT INTO senac.compras (evento_id, meia_entrada, quantidade, valor_ingresso, total_ingresso, forma_pagamento, nome_comprador, data_hora_compra) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO senac.compras (evento_id, meia_entrada, quantidade, valor_ingresso, valor_pago, forma_pagamento, nome_comprador, data_hora_compra) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setInt(1, compra.getEventoId());
             ps.setBoolean(2, compra.isMeiaEntrada());
             ps.setInt(3, compra.getQuantidade());
             ps.setDouble(4, compra.getValorIngresso());
-            ps.setDouble(5, compra.getTotalIngresso());
+            ps.setDouble(5, compra.getValorPago());
             ps.setString(6, compra.getFormaPagamento());
             ps.setString(7, compra.getNomeComprador());
             ps.setObject(8, compra.getDataHoraCompra());
-
             ps.executeUpdate();
         } finally {
             if (ps != null) {

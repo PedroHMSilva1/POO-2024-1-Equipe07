@@ -8,18 +8,18 @@ public class Compra {
     private boolean meiaEntrada;
     private int quantidade;
     private double valorIngresso;
-    private double totalIngresso;
+    private double valorPago;
     private String formaPagamento;
     private String nomeComprador;
     private LocalDateTime dataHoraCompra;
 
     // Construtor
-    public Compra(int eventoId, boolean meiaEntrada, int quantidade, double valorIngresso, double totalIngresso, String formaPagamento, String nomeComprador, LocalDateTime dataHoraCompra) {
+    public Compra(int eventoId, boolean meiaEntrada, int quantidade, double valorIngresso, double valorPago, String formaPagamento, String nomeComprador, LocalDateTime dataHoraCompra) {
         this.eventoId = eventoId;
         this.meiaEntrada = meiaEntrada;
         this.quantidade = quantidade;
         this.valorIngresso = valorIngresso;
-        this.totalIngresso = totalIngresso;
+        this.valorPago = valorPago;
         this.formaPagamento = formaPagamento;
         this.nomeComprador = nomeComprador;
         this.dataHoraCompra = dataHoraCompra;
@@ -66,12 +66,12 @@ public class Compra {
         this.valorIngresso = valorIngresso;
     }
 
-    public double getTotalIngresso() {
-        return totalIngresso;
+    public double getValorPago() {
+        return valorPago;
     }
 
-    public void setTotalIngresso(double totalIngresso) {
-        this.totalIngresso = totalIngresso;
+    public void setValorPago(double valorPago) {
+        this.valorPago = valorPago;
     }
 
     public String getFormaPagamento() {

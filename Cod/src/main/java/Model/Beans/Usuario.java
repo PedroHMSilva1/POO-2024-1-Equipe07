@@ -72,7 +72,7 @@ public class Usuario {
     }
 
     public boolean isOrganizador() {
-        return organizador;
+        return false; // Por padrão, um usuário não é um organizador
     }
 
     public void setOrganizador(boolean organizador) {

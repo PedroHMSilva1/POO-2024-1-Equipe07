@@ -61,16 +61,16 @@ public class FormularioCompraIngresso extends JDialog {
                     valorUnitario /= 2; // Se for meia entrada, divide o valor pela metade
                 }
 
-                // Calcular o total do ingresso
-                double totalIngresso = valorUnitario * quantidade;
+                // Calcular o valor total pago
+                double valorPago = valorUnitario * quantidade;
 
                 // Mostrar janela de confirmação
                 int confirmacao = JOptionPane.showConfirmDialog(FormularioCompraIngresso.this,
-                        "O total da compra é: " + totalIngresso + ".\nDeseja confirmar a compra?",
+                        "O valor total da compra é: " + valorPago + ".\nDeseja confirmar a compra?",
                         "Confirmação de Compra", JOptionPane.YES_NO_OPTION);
                 if (confirmacao == JOptionPane.YES_OPTION) {
                     // Criar o objeto Compra com os dados do formulário
-                    Compra compra = new Compra(eventoId, meiaEntrada, quantidade, valorIngresso, totalIngresso, formaPagamento, nomeComprador, dataHoraCompra);
+                    Compra compra = new Compra(eventoId, meiaEntrada, quantidade, valorIngresso, valorPago, formaPagamento, nomeComprador, dataHoraCompra);
 
                     try {
                         // Chamar o método registrarCompra do CompraDAO
