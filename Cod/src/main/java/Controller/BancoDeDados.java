@@ -28,7 +28,7 @@ public class BancoDeDados {
 
     public static void main(String[] args) {
 
-        ImageIcon eventIcon = new ImageIcon("src\\Assets\\EventMaster.jpg");
+    ImageIcon eventIcon = new ImageIcon("src/main/java/Assets/EventMaster.jpg");
         try {
             String operacao[] = {"Cadastro de Usuário", "Login"};
             Object escolha = JOptionPane.showInputDialog(null, "O que deseja realizar?", "EventMaster", JOptionPane.QUESTION_MESSAGE, eventIcon, operacao, operacao[0]);
