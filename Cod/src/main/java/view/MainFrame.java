@@ -1,14 +1,12 @@
 package view;
 
-import Controller.BancoDeDados;
-import Controller.BancoDeDados;
 import Model.Beans.Evento;
 import Model.Beans.Usuario;
-
-import javax.swing.*;
+import Model.DAO.BancoDeDados;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class MainFrame extends JFrame {
 

@@ -1,8 +1,6 @@
 package Model.DAO;
 
-import Controller.ConexaoMySQL;
 import Model.Beans.Evento;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

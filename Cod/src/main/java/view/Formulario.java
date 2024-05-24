@@ -1,7 +1,8 @@
 package view;
 
 import Model.Beans.Usuario;
-import Controller.BancoDeDados;
+import Model.DAO.BancoDeDados;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

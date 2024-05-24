@@ -1,9 +1,12 @@
 package view;
 
-import Controller.BancoDeDados;
-import static Controller.BancoDeDados.recuperarUsuario;
 import Model.Beans.Usuario;
+import Model.DAO.BancoDeDados;
+
 import javax.swing.*;
+
+import static Model.DAO.BancoDeDados.recuperarUsuario;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,10 +1,8 @@
 package view;
 
-import Controller.BancoDeDados;
 import Model.Beans.Usuario;
-
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class Perfil extends JFrame {
 

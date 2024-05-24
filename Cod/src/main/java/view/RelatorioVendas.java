@@ -1,17 +1,12 @@
 package view;
 
-import Controller.BancoDeDados;
-import Model.Beans.Compra;
-import Model.Beans.Evento;
 import Model.Beans.Usuario;
 import Model.Beans.VendaEvento;
-
-import javax.swing.*;
+import Model.DAO.BancoDeDados;
 import java.awt.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import javax.swing.*;
 
 public class RelatorioVendas extends JDialog {
 

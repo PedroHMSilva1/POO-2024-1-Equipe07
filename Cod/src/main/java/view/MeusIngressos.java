@@ -1,15 +1,14 @@
 package view;
 
-import Controller.BancoDeDados;
 import Model.Beans.Compra;
 import Model.Beans.Evento;
 import Model.Beans.Usuario;
+import Model.DAO.BancoDeDados;
 import Model.DAO.IngressoUsuarioDAO;
-
-import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class MeusIngressos extends JDialog {
 
