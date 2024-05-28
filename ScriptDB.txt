@@ -1,7 +1,4 @@
 CREATE DATABASE senac;
-
-SELECT * FROM senac.usuarios;
-
 CREATE TABLE senac.usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     Nome VARCHAR(100) NOT NULL,
@@ -42,10 +39,23 @@ CREATE TABLE senac.compras (
 );
 
 
+INSERT INTO senac.usuarios (Nome, Email, Senha, Telefone, Organizador)
+VALUES ('Levi Freitas', 'levi@freitas.com', 'levi123', '11912345678', TRUE);
+
+
+INSERT INTO senac.eventos (titulo, data_hora, localizacao, descricao, capacidade, valor_ingressos, id_organizador)
+VALUES 
+('Festa Junina', '2024-06-24 12:00:00', 'Av. Sargento Geraldo Sant`Ana, 901 - Jardim Marajoara, São Paulo - SP, 04674-225', 'Uma celebração tradicional com comidas típicas, música e dança.', 300, 10.00, 1),
+('Halloween', '2024-10-31 20:00:00', 'Av. Pfa. Ida Kolb, 513 - Jardim das Laranjeiras, São Paulo - SP, 02518-000', 'Festa à fantasia com decoração temática e concurso de fantasias.', 550, 25.00, 1),
+('Workshop de Fotografia', '2024-08-15 14:00:00', 'Av. Eng. Eusébio Stevaux, 823 - Santo Amaro, São Paulo - SP, 04696-000', 'Aprenda técnicas básicas e avançadas de fotografia com profissionais renomados.', 250, 15.00, 1),
+('Feira de Tecnologia', '2024-09-10 10:00:00', 'Av. das Nações Unidas, 12551 - Brooklin Novo, São Paulo - SP, 04578-903', 'Evento para conhecer as últimas novidades em tecnologia e inovação.', 300, 35.00, 1);
+
+SELECT * FROM senac.usuarios;
 SELECT * FROM senac.Login;
 SELECT * FROM senac.eventos;
 SELECT * FROM senac.compras;
 
-DROP TABLE senac.Login;
+DROP TABLE senac.usuarios;
 DROP TABLE senac.compras;
-DROP TABLE senac.
+DROP TABLE senac.Login;
+DROP TABLE senac.eventos;
