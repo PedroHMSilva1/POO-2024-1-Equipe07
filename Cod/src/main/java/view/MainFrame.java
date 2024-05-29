@@ -36,7 +36,7 @@ public class MainFrame extends JFrame {
         JPanel profilePanel = new JPanel(new BorderLayout());
         profilePanel.setBackground(Color.LIGHT_GRAY);
 
-        ImageIcon profileImageIcon = new ImageIcon("src/main/java/Assets/Perfil.png");
+        ImageIcon profileImageIcon = new ImageIcon("Cod/src/main/java/Assets/Perfil.png");
         Image profileImage = profileImageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         JLabel profileImageLabel = new JLabel(new ImageIcon(profileImage));
         profileImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -100,7 +100,7 @@ public class MainFrame extends JFrame {
         infoText.setFont(new Font("Serif", Font.BOLD, 20));
         sidePanel.add(new JScrollPane(infoText));
 
-        JPanel mapPanel = new ImagePanel("src/main/java/Assets/mapa.jpg");
+        JPanel mapPanel = new ImagePanel("Cod/src/main/java/Assets/mapa.jpg");
         mapPanel.add(new JLabel("Localização"));
         sidePanel.add(mapPanel);
 
