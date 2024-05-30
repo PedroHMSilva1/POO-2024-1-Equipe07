@@ -30,18 +30,27 @@ public class MeusIngressos extends JDialog {
                 Evento evento = BancoDeDados.recuperarEventoPorId(compra.getEventoId());
                 String nomeEvento = evento.getTitulo(); // Supondo que existe um método getNome() na classe Evento
                 String localizacao = evento.getLocalizacao(); // Supondo que existe um método getLocalizacao() na classe Evento
+                String dataEvento = evento.getDataHora();
 
                 JLabel eventoLabel = new JLabel("Evento: " + nomeEvento); // Exibir o nome do evento
-                JLabel localizacaoLabel = new JLabel("Localização: " + localizacao); // Exibir a localização
+                JLabel dataEventoLabel = new JLabel("Data do Evento: " + dataEvento);
                 JLabel quantidadeLabel = new JLabel("Quantidade: " + compra.getQuantidade());
                 JLabel valorPagoLabel = new JLabel("Valor Pago: " + compra.getValorPago());
+                JLabel localizacaoLabel = new JLabel("Localização: " + localizacao + "        "); // Exibir a localização, espaço colocado como "margem" para as outras informações
+                JLabel nomeCompradorLabel = new JLabel("Nome: " + compra.getNomeComprador());
+                JLabel idIngressoLabel = new JLabel("Id do Ingresso: " + 1324000 + compra.getId());
                 JLabel dataHoraCompraLabel = new JLabel("Data/Hora da Compra: " + compra.getDataHoraCompra());
+                JLabel formaPagaLabel = new JLabel("Forma do Pagamento: " + compra.getFormaPagamento());
 
                 compraPanel.add(eventoLabel);
+                compraPanel.add(dataEventoLabel);
                 compraPanel.add(localizacaoLabel);
-                compraPanel.add(quantidadeLabel);
+                compraPanel.add(quantidadeLabel);                
                 compraPanel.add(valorPagoLabel);
                 compraPanel.add(dataHoraCompraLabel);
+                compraPanel.add(nomeCompradorLabel);
+                compraPanel.add(idIngressoLabel);
+                compraPanel.add(formaPagaLabel);
 
                 panel.add(compraPanel);
             }
@@ -52,6 +61,7 @@ public class MeusIngressos extends JDialog {
 
         getContentPane().add(new JScrollPane(panel));
         setSize(800, 400); // Ajustando o tamanho do painel conforme necessário
+
         setLocationRelativeTo(parentFrame);
     }
 }

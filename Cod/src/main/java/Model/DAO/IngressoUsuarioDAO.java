@@ -23,6 +23,7 @@ public class IngressoUsuarioDAO {
         ps.setString(1, usuarioLogado.getNome()); // Usar o nome do comprador como parâmetro
         rs = ps.executeQuery();
         while (rs.next()) {
+            int idIngresso = rs.getInt("id");
             int eventoId = rs.getInt("evento_id");
             boolean meiaEntrada = rs.getBoolean("meia_entrada");
             int quantidade = rs.getInt("quantidade");
@@ -32,7 +33,7 @@ public class IngressoUsuarioDAO {
             String nomeComprador = rs.getString("nome_comprador");
             LocalDateTime dataHoraCompra = rs.getObject("data_hora_compra", LocalDateTime.class);
 
-            Compra compra = new Compra(eventoId, meiaEntrada, quantidade, valorIngresso, valorPago, formaPagamento, nomeComprador, dataHoraCompra);
+            Compra compra = new Compra(idIngresso, eventoId, meiaEntrada, quantidade, valorIngresso, valorPago, formaPagamento, nomeComprador, dataHoraCompra);
             compras.add(compra);
         }
     } finally {

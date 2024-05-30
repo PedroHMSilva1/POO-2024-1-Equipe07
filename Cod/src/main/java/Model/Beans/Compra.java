@@ -13,8 +13,20 @@ public class Compra {
     private String nomeComprador;
     private LocalDateTime dataHoraCompra;
 
-    // Construtor
-    public Compra(int eventoId, boolean meiaEntrada, int quantidade, double valorIngresso, double valorPago, String formaPagamento, String nomeComprador, LocalDateTime dataHoraCompra) {
+    // Construtor com Id para visualização do usuário
+    public Compra(int id, int eventoId, boolean meiaEntrada, int quantidade, double valorIngresso, double valorPago, String formaPagamento, String nomeComprador, LocalDateTime dataHoraCompra) {
+        this.id = id;
+        this.eventoId = eventoId;
+        this.meiaEntrada = meiaEntrada;
+        this.quantidade = quantidade;
+        this.valorIngresso = valorIngresso;
+        this.valorPago = valorPago;
+        this.formaPagamento = formaPagamento;
+        this.nomeComprador = nomeComprador;
+        this.dataHoraCompra = dataHoraCompra;
+    }
+    // Construtor sem Id do ingresso para compra
+        public Compra(int eventoId, boolean meiaEntrada, int quantidade, double valorIngresso, double valorPago, String formaPagamento, String nomeComprador, LocalDateTime dataHoraCompra) {
         this.eventoId = eventoId;
         this.meiaEntrada = meiaEntrada;
         this.quantidade = quantidade;

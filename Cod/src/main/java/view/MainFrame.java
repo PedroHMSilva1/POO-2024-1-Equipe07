@@ -2,11 +2,23 @@ package view;
 
 import Model.Beans.Evento;
 import Model.Beans.Usuario;
+
 import Model.DAO.BancoDeDados;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import view.FormularioCompraIngresso;
+import view.FormularioEvento;
+import view.ImagePanel;
+import view.JCalendar;
+import view.MeusEventos;
+import view.MeusIngressos;
+import view.Perfil;
+
+import view.RelatorioVendas;
 
 public class MainFrame extends JFrame {
 
@@ -47,7 +59,7 @@ public class MainFrame extends JFrame {
         usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         profilePanel.add(usernameLabel, BorderLayout.SOUTH);
 
-        String[] menuItems = {"Profile", "Cadastrar Eventos", "Preferências", "Meus Ingressos", "Relatório de Vendas", "Logout"};
+        String[] menuItems = {"Profile", "Cadastrar Eventos", "Meus Eventos", "Meus Ingressos", "Relatório de Vendas", "Logout"};
         JList<String> menuList = new JList<>(menuItems);
         JScrollPane menuScrollPane = new JScrollPane(menuList);
         JPanel menuPanel = new JPanel(new BorderLayout());
@@ -68,6 +80,16 @@ public class MainFrame extends JFrame {
                                 ex.printStackTrace();
                             }
                             break;
+                        case "Meus Eventos":
+                        {
+                            try {
+                                exibirMeusEventos(usuarioLogado, userID);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                            break;
+
                         case "Profile":
                             exibirPerfil(usuarioLogado);
                             break;
@@ -154,10 +176,14 @@ public class MainFrame extends JFrame {
             });
             buttonPanel.add(detailsButton);
 
-            JButton buyTicketButton = new JButton("Comprar Ingresso");
+             JButton buyTicketButton = new JButton("Comprar Ingresso");
             buyTicketButton.addActionListener(e -> {
-                FormularioCompraIngresso compraIngresso = new FormularioCompraIngresso(MainFrame.this, evento, usuarioLogado.getNome());
-                compraIngresso.setVisible(true);
+                if (!usuarioLogado.isOrganizador()) {
+                    FormularioCompraIngresso compraIngresso = new FormularioCompraIngresso(this, evento, usuarioLogado.getNome());
+                    compraIngresso.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Apenas clientes podem comprar ingressos.", "Acesso Negado", JOptionPane.WARNING_MESSAGE);
+                }
             });
             buttonPanel.add(buyTicketButton);
 
@@ -199,6 +225,17 @@ public class MainFrame extends JFrame {
             relatorioVendas.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Apenas organizadores podem acessar o relatório de vendas.", "Acesso Negado", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
+    private void exibirMeusEventos(Usuario usuario, int userID) throws SQLException {
+        if (usuarioLogado.isOrganizador()) {
+            dispose();
+            MeusEventos meusEventos = new MeusEventos(usuarioLogado, userID);
+            meusEventos.setLocationRelativeTo(null);
+            meusEventos.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Apenas organizadores podem acessar área de Eventos", "Acesso Negado", JOptionPane.WARNING_MESSAGE);
         }
     }
 
