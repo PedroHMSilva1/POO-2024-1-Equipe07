@@ -95,15 +95,17 @@ public class MeusEventos extends JFrame {
 
         add(splitPane, BorderLayout.CENTER);
 
-        setSize(1200, 1000);
+        setSize(800, 600);
         setVisible(true);
 
-        atualizarEventos();
+        atualizarEventos(usuarioLogado, userID);
+        System.out.println("Aqui está o id logado: " + userID);
     }
 
-    void atualizarEventos() throws SQLException {
+    void atualizarEventos(Usuario usuarioLogado, int userID) throws SQLException {
+        System.out.println("Aqui está o id do usuario " + userID);
         eventsPanel.removeAll();
-        ArrayList<Evento> eventos = BancoDeDados.recuperarEventos();
+        ArrayList<Evento> eventos = BancoDeDados.recuperarMeusEventos(userID);
         for (Evento evento : eventos) {
             JPanel eventPanel = new JPanel(new BorderLayout());
             eventPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -127,13 +129,29 @@ public class MeusEventos extends JFrame {
 
             JButton detailsButton = new JButton("Excluir Evento");
             detailsButton.addActionListener(e -> {
-                // Implementação da exclusão de evento
+                try {
+                    int nClientes = BancoDeDados.recuperarIngressosPorEvento(evento.getId());
+                    String mensagem = "Tem certeza que deseja excluir este evento? Existem um total de " + nClientes + " clientes que compraram ingressos para esse evento. Os clientes serão reembolsados.";
+
+                    int response = JOptionPane.showConfirmDialog(null, mensagem, "Confirmar Exclusão",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+                    if (response == JOptionPane.YES_OPTION) {
+                        BancoDeDados.excluirEvento(evento.getId());
+                        atualizarEventos(usuarioLogado, userID);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(MeusEventos.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir evento: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                }
             });
+
             buttonPanel.add(detailsButton);
 
             JButton buyTicketButton = new JButton("Alterar Evento");
             buyTicketButton.addActionListener(e -> {
                 // Implementação da alteração de evento
+
             });
             buttonPanel.add(buyTicketButton);
 

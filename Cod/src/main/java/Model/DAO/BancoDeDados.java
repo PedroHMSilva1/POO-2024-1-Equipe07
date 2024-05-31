@@ -24,7 +24,7 @@ public class BancoDeDados {
 
     public static void main(String[] args) {
 
-    ImageIcon eventIcon = new ImageIcon("Cod/src/main/java/Assets/EventMaster.jpg");
+        ImageIcon eventIcon = new ImageIcon("Cod/src/main/java/Assets/EventMaster.jpg");
         try {
             String operacao[] = {"Cadastro de Usuário", "Login"};
             Object escolha = JOptionPane.showInputDialog(null, "O que deseja realizar?", "EventMaster", JOptionPane.QUESTION_MESSAGE, eventIcon, operacao, operacao[0]);
@@ -247,6 +247,48 @@ public class BancoDeDados {
         return eventos;
     }
 
+    public static ArrayList<Evento> recuperarMeusEventos(int userId) throws SQLException {
+        ArrayList<Evento> eventos = new ArrayList<>();
+
+        Connection cn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            cn = conexao.openDB();
+            ps = cn.prepareStatement("SELECT * FROM senac.eventos WHERE id_organizador = ?");
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String titulo = rs.getString("titulo");
+                String dataHora = rs.getString("data_hora");
+                String localizacao = rs.getString("localizacao");
+                String descricao = rs.getString("descricao");
+                int capacidade = rs.getInt("capacidade");
+                double valorIngressos = rs.getDouble("valor_ingressos");
+                int idOrganizador = rs.getInt("id_organizador");
+
+                // Criar um objeto Evento e adicioná-lo à lista de eventos
+                Evento evento = new Evento(id, titulo, dataHora, localizacao, descricao, capacidade, valorIngressos, idOrganizador);
+                eventos.add(evento);
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+
+        return eventos;
+    }
+
     public static Map<Integer, VendaEvento> recuperarVendasPorEvento() throws SQLException {
         Map<Integer, VendaEvento> vendasPorEvento = new HashMap<>();
 
@@ -296,6 +338,74 @@ public class BancoDeDados {
             }
         }
         return null; // Retorna null se o evento com o ID especificado não for encontrado
+    }
+
+    public static void excluirEvento(int eventoId) throws SQLException {
+        Connection cn = null;
+        PreparedStatement psIngressos = null;
+        PreparedStatement psEvento = null;
+
+        try {
+            cn = conexao.openDB();
+            cn.setAutoCommit(false);  // Inicia a transação
+
+            // Primeiro exclua os ingressos relacionados ao evento
+            psIngressos = cn.prepareStatement("DELETE FROM senac.compras WHERE evento_id = ?");
+            psIngressos.setInt(1, eventoId);
+            psIngressos.executeUpdate();
+
+            // Em seguida, exclua o evento
+            psEvento = cn.prepareStatement("DELETE FROM senac.eventos WHERE id = ?");
+            psEvento.setInt(1, eventoId);
+            psEvento.executeUpdate();
+
+            cn.commit();  // Confirma a transação
+        } catch (SQLException e) {
+            if (cn != null) {
+                cn.rollback();  // Desfaz a transação em caso de erro
+            }
+            throw e;
+        } finally {
+            if (psIngressos != null) {
+                psIngressos.close();
+            }
+            if (psEvento != null) {
+                psEvento.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+    }
+
+    public static int recuperarIngressosPorEvento(int eventoId) throws SQLException {
+        Connection cn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int count = 0;
+
+        try {
+            cn = conexao.openDB();
+            ps = cn.prepareStatement("SELECT COUNT(*) AS total FROM senac.compras WHERE evento_id = ?");
+            ps.setInt(1, eventoId);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt("total");
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+
+        return count;
     }
 
 }

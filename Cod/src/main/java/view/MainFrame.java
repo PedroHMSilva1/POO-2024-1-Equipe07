@@ -80,15 +80,14 @@ public class MainFrame extends JFrame {
                                 ex.printStackTrace();
                             }
                             break;
-                        case "Meus Eventos":
-                        {
+                        case "Meus Eventos": {
                             try {
                                 exibirMeusEventos(usuarioLogado, userID);
                             } catch (SQLException ex) {
                                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
-                            break;
+                        break;
 
                         case "Profile":
                             exibirPerfil(usuarioLogado);
@@ -176,7 +175,7 @@ public class MainFrame extends JFrame {
             });
             buttonPanel.add(detailsButton);
 
-             JButton buyTicketButton = new JButton("Comprar Ingresso");
+            JButton buyTicketButton = new JButton("Comprar Ingresso");
             buyTicketButton.addActionListener(e -> {
                 if (!usuarioLogado.isOrganizador()) {
                     FormularioCompraIngresso compraIngresso = new FormularioCompraIngresso(this, evento, usuarioLogado.getNome());
@@ -227,7 +226,7 @@ public class MainFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Apenas organizadores podem acessar o relatório de vendas.", "Acesso Negado", JOptionPane.WARNING_MESSAGE);
         }
     }
-    
+
     private void exibirMeusEventos(Usuario usuario, int userID) throws SQLException {
         if (usuarioLogado.isOrganizador()) {
             dispose();
@@ -245,8 +244,13 @@ public class MainFrame extends JFrame {
     }
 
     private void exibirMeusIngressos(Usuario usuario) {
-        MeusIngressos janelaIngressos = new MeusIngressos(this, usuarioLogado);
-        janelaIngressos.setVisible(true);
+        if (!usuarioLogado.isOrganizador()) {
+            MeusIngressos janelaIngressos = new MeusIngressos(this, usuarioLogado);
+            janelaIngressos.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Apenas clientes podem acessar área de Ingressos", "Acesso Negado", JOptionPane.WARNING_MESSAGE);
+        }
+
     }
 
 }
