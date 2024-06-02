@@ -12,6 +12,8 @@ view\FormularioCompraIngresso.class
 Model\DAO\CompraDAO.class
 Controller\AppEventMaster.class
 Model\Beans\Organizador.class
+view\FormularioEditarEvento.class
+view\FormularioEditarEvento$1.class
 view\Formulario.class
 view\Formulario$1.class
 view\Login$1.class

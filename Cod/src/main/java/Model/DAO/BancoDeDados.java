@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -329,6 +330,32 @@ public class BancoDeDados {
 
         return vendasPorEvento;
     }
+    
+    public static void alteraEvento(Evento evento) throws SQLException {
+    Connection cn = null;
+    PreparedStatement ps = null;
+
+    try {
+        cn = conexao.openDB();
+        ps = cn.prepareStatement(
+            "UPDATE senac.eventos SET titulo = ?, localizacao = ?, descricao = ? WHERE id = ?"
+        );
+        ps.setString(1, evento.getTitulo());
+        ps.setString(2, evento.getLocalizacao());
+        ps.setString(3, evento.getDescricao());
+        ps.setInt(4, evento.getId());
+        
+        ps.executeUpdate();
+    } finally {
+        if (ps != null) {
+            ps.close();
+        }
+        if (cn != null) {
+            cn.close();
+        }
+    }
+}
+
 
     public static Evento recuperarEventoPorId(int id) throws SQLException {
         ArrayList<Evento> eventos = recuperarEventos();

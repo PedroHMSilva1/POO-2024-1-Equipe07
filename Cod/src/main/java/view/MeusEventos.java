@@ -73,6 +73,7 @@ public class MeusEventos extends JFrame {
                         case "Profile":
                             exibirPerfil(usuarioLogado);
                             break;
+                            
                     }
                 }
             }
@@ -148,12 +149,17 @@ public class MeusEventos extends JFrame {
 
             buttonPanel.add(detailsButton);
 
-            JButton buyTicketButton = new JButton("Alterar Evento");
-            buyTicketButton.addActionListener(e -> {
-                // Implementação da alteração de evento
-
+            JButton alterarButton = new JButton("Alterar Evento");
+            alterarButton.addActionListener(e -> {
+                try {
+                    dispose();
+                    new FormularioEditarEvento(evento, usuarioLogado, userID, this).setVisible(true);
+                    // No need to hide the current window; it will be refreshed after editing
+                } catch (Exception ex) {
+                    Logger.getLogger(MeusEventos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             });
-            buttonPanel.add(buyTicketButton);
+            buttonPanel.add(alterarButton);
 
             eventPanel.add(buttonPanel, BorderLayout.SOUTH);
 
