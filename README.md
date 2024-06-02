@@ -8,9 +8,11 @@ O EventMaster é um aplicativo desktop projetado para facilitar o gerenciamento 
 ## 🛠 Funcionalidades
 - Cadastro de Eventos
 - Visualização de Eventos
+- Exclusão de Eventos
+- Alteração de Eventos
 - Venda de Ingressos
-- Controle de Participantes
-- Relatórios e Estatísticas
+- Visualização de Ingressos
+- Relatórios de Vendas 
 
 ## 📝 Autores - POO-2024-1-Equipe07
 
